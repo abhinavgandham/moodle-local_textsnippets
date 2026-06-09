@@ -1,7 +1,7 @@
 <?php
 
 require(__DIR__ . '/../../lib/formslib.php');
-require(__DIR__ . '/classes/snippet.php');
+require_once(__DIR__ . '/classes/snippet.php');
 
 class createsnippet_form extends \moodleform {
     public function definition() {
