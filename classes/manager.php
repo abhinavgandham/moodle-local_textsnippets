@@ -31,4 +31,10 @@ class manager {
         $snippet->set('shared', $data->shared ? 1 : 0);
         $snippet->create();
     }
+
+    public static function delete_snippet(int $id): void {
+        $snippet = new snippet($id);
+        $snippet->delete();
+    }
+
 }

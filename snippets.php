@@ -14,6 +14,15 @@ $PAGE->set_url(new moodle_url('/local/feedbackbank/snippets.php'));
 $PAGE->set_title("Feedback Bank");
 $PAGE->set_heading("Feedback Bank");
 
+$action = optional_param('action', '', PARAM_ALPHA);
+$id     = optional_param('id', 0, PARAM_INT);
+
+if ($action === 'delete' && $id) {
+    require_sesskey();
+    manager::delete_snippet($id);
+    redirect($PAGE->url);
+}
+
 $createsnippetform = new createsnippet_form();
 
 if ($createsnippetform->is_cancelled()) {
@@ -24,7 +33,7 @@ if ($createsnippetform->is_cancelled()) {
 
 echo $OUTPUT->header();
 
-echo "Manage your reusable feedback snippets here.";
+echo 'Manage your reusable feedback snippets here.';
 
 echo $createsnippetform->render();
 

@@ -28,12 +28,20 @@ class snippet_table extends \html_table {
         foreach ($this->snippets as $snippet) {
             $categoryid = $snippet->get('categoryid');
 
+            $deleteurl = new moodle_url('/local/feedbackbank/snippets.php', 
+            ['action' => 'delete', 
+            'id' => $snippet->get('id'),
+            'sesskey' => sesskey()]);
+
+            $deletelink = html_writer::link($deleteurl, 'Delete', ['class' => 'btn btn-sm btn-danger']);
+
+
             $this->data[] = [
                 $snippet->get('label'),
                 shorten_text(format_text($snippet->get('content'), FORMAT_HTML), 100),
                 $this->categories[$categoryid] ?? 'Uncategorised',
                 $snippet->is_shared() ? 'Shared' : 'Private',
-                '',
+                $deletelink,
             ];
         }
 
